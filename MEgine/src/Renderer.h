@@ -4,7 +4,7 @@
 #include <GLFW/glfw3.h>
 
 #define ASSERT(x) if(!x)  __debugbreak();
-#define GLCall(x) GLClearColor();\
+#define GLCall(x) GLClearError();\
 	x;\
 	ASSERT(GLGetError());\
 
