@@ -1,4 +1,7 @@
 #include "Helpers.h"
+#include "src/VertexBuffer.h"
+#include "src/IndexBuffer.h"
+
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -42,10 +45,10 @@ static ShaderProgramSource ParseShader(const std::string& source)
 
 	return { ss[0].str(), ss[1].str() };
 }
-static unsigned int CompileShader(unsigned int type,const std::string& source)
+static unsigned int CompileShader(unsigned int type, const std::string& source)
 {
 	unsigned int id = glCreateShader(type);
-	const char * src = source.c_str();
+	const char* src = source.c_str();
 	glShaderSource(id, 1, &src, nullptr);
 	glCompileShader(id);
 
@@ -57,7 +60,7 @@ static unsigned int CompileShader(unsigned int type,const std::string& source)
 		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &lenght);
 		char* message = (char*)alloca(sizeof(char) * lenght);
 		glGetShaderInfoLog(id, lenght, &lenght, message);
-		std::cout << "Failed To compile Shader " << (type == GL_VERTEX_SHADER ? "vertex" : "fragmet")<< " shader!" << std::endl;
+		std::cout << "Failed To compile Shader " << (type == GL_VERTEX_SHADER ? "vertex" : "fragmet") << " shader!" << std::endl;
 		std::cout << message << std::endl;
 		glDeleteShader(0);
 		return 0;
@@ -74,14 +77,14 @@ static int CreateShader(const std::string& vertexShader, const std::string& frag
 	glAttachShader(program, fs);
 	glLinkProgram(program);
 	glValidateProgram(program);
-	
+
 	glDeleteShader(vs);
 	glDeleteShader(fs);
 
 	return program;
 }
 
-int main(void) 
+int main(void)
 {
 	GLFWwindow* window;
 
@@ -108,32 +111,31 @@ int main(void)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	float data[] ={
+	float data[] = {
 		-0.5f, -0.5f, 0.0f, //0
 		 0.5f, -0.5f, 0.0f, //1
 		 0.5f,  0.5f, 0.0f, //2
-	 	-0.5f,  0.5f, 0.0f  //3
+		-0.5f,  0.5f, 0.0f  //3
 	};
 
-	unsigned int indecies[] 
+	unsigned int indecies[]
 	{
 		0, 1, 2,
 		2, 3, 0
 	};
-
-	GLuint buffer; 
-	GLCall(glGenBuffers(1, &buffer));
+	/*GLCall(glGenBuffers(1, &buffer));
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, buffer));
-	GLCall(glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 12, data, GL_STATIC_DRAW));
+	GLCall(glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 12, data, GL_STATIC_DRAW));*/
+	VertexBuffer vb(data, sizeof(float) * 12);
 
 	GLCall(glEnableVertexAttribArray(0));
 	GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0));
-	
-	unsigned int ibo;
+
+	/*unsigned int ibo;
 	GLCall(glGenBuffers(1, &ibo));
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo));
-	GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * 6, indecies, GL_STATIC_DRAW));
-
+	GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * 6, indecies, GL_STATIC_DRAW));*/
+	IndexBuffer ib(indecies, 6);
 	ShaderProgramSource source = ParseShader("res/shader/Basic.Shader");
 	auto shader = CreateShader(source.VertexSource, source.FragmentSource);
 	GLCall(glUseProgram(shader));
