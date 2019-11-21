@@ -1,7 +1,7 @@
 #include "Helpers.h"
 #include "src/VertexBuffer.h"
 #include "src/IndexBuffer.h"
-
+#include "src/VertexArray.h"
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -123,18 +123,14 @@ int main(void)
 		0, 1, 2,
 		2, 3, 0
 	};
-	/*GLCall(glGenBuffers(1, &buffer));
-	GLCall(glBindBuffer(GL_ARRAY_BUFFER, buffer));
-	GLCall(glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 12, data, GL_STATIC_DRAW));*/
+	VertexArray va;
 	VertexBuffer vb(data, sizeof(float) * 12);
+	VertexBufferLayout layout;
+	layout.Push<float>(3);
+	va.AddBuffer(vb, layout);
+	/*GLCall(glEnableVertexAttribArray(0));
+	GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0));*/
 
-	GLCall(glEnableVertexAttribArray(0));
-	GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0));
-
-	/*unsigned int ibo;
-	GLCall(glGenBuffers(1, &ibo));
-	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo));
-	GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * 6, indecies, GL_STATIC_DRAW));*/
 	IndexBuffer ib(indecies, 6);
 	ShaderProgramSource source = ParseShader("res/shader/Basic.Shader");
 	auto shader = CreateShader(source.VertexSource, source.FragmentSource);
@@ -143,11 +139,14 @@ int main(void)
 	int location = glGetUniformLocation(shader, "u_Color");
 	float r = 0.05f;
 	float increment = 0.005f;
+	ib.UnBind();
 	while (!glfwWindowShouldClose(window))
 	{
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glUniform4f(location, r, 0.7f, 0.7f, 1.0f);
+		va.Bind();
+		ib.Bind();
 		GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 		if (r > 1.0f)
 		{
