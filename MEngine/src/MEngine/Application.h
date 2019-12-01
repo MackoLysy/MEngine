@@ -1,16 +1,23 @@
 #pragma once
 #include <iostream>
+#include <functional>
+#include <memory>
+#include "Components/InputComponent.h"
 #include "Core.h"
-__declspec(dllexport) void Print();
+#include "Input.h"
 
-class MGINE_API Application
+struct GLFWwindow;
+
+class Application
 {
 public:
-	Application();
-	void Run();
-	~Application();
-	void Test();
+	MGINE_API Application();
+	MGINE_API void Run();
+	MGINE_API ~Application();
 private:
-	
+	void Init();
+	std::unique_ptr<Input> m_input;
+	GLFWwindow* m_window;
+	InputComponent* test;
 };
 
