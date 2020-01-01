@@ -1,9 +1,10 @@
 #pragma once
-#include "Helpers.h"
+#include "../Helpers.h"
 
 class IndexBuffer
 {
 public:
+	IndexBuffer() = default;
 	IndexBuffer(const unsigned int* data, unsigned int count);
 	~IndexBuffer();
 	void Bind() const;

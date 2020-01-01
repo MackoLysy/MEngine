@@ -27,3 +27,6 @@ KeyEvent InputComponent::GetKey()
 {
 	return m_key;
 }
+
+void InputComponent::update() {}
+void InputComponent::draw() {}

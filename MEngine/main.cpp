@@ -1,6 +1,6 @@
-#include "src/VertexBuffer.h"
-#include "src/IndexBuffer.h"
-#include "src/VertexArray.h"
+#include "src/OpenGl/VertexBuffer.h"
+#include "src/OpenGl/IndexBuffer.h"
+#include "src/OpenGl/VertexArray.h"
 #include "src/Shader.h"
 #include "src/Renderer.h"
 #include "src/Texture.h"
@@ -67,7 +67,7 @@ int main(void)
 		VertexBufferLayout layout;
 		layout.Push<float>(3);
 		layout.Push<float>(2);
-		va.AddBuffer(vb, layout);
+		//va.AddBuffer(vb, layout);
 
 		Shader shader("res/shader/Basic.Shader");
 

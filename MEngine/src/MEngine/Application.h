@@ -2,22 +2,29 @@
 #include <iostream>
 #include <functional>
 #include <memory>
+#include <list>
+
 #include "Components/InputComponent.h"
 #include "Core.h"
+#include "Object.h"
 #include "Input.h"
 
 struct GLFWwindow;
 
-class Application
+class MGINE_API Application
 {
 public:
-	MGINE_API Application();
-	MGINE_API void Run();
-	MGINE_API ~Application();
+	Application();
+	~Application();
+	void addObject(Object*);
+	void Run();
+
 private:
 	void Init();
 	std::unique_ptr<Input> m_input;
 	GLFWwindow* m_window;
-	InputComponent* test;
+	std::list<Object*> m_items;
+	void Draw();
+	void Update();
 };
 

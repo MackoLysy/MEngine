@@ -2,7 +2,8 @@
 #include <vector>
 #include "GL/glew.h"
 
-#include "Helpers.h"
+#include "../Helpers.h"
+#include "../MEngine/Vertex.h"
 
 struct VertexBufferElement
 {
@@ -43,6 +44,16 @@ public:
 			GL_FALSE
 		});
 		m_Stride += count * VertexBufferElement::GetSizeOfType(GL_FLOAT);
+
+	}
+	template<>
+	void Push<Pos>(unsigned int count)
+	{
+
+	}
+	template<>
+	void Push<Color>(unsigned int count)
+	{
 
 	}
 

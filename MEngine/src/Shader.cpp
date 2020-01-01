@@ -4,8 +4,6 @@
 #include <string>
 #include <sstream>
 
-
-
 Shader::Shader(const std::string& filepath): m_filePath(filepath), m_RendererID(0)
 {
 	ShaderProgramSource source = ParseShader(filepath);

@@ -11,7 +11,7 @@ struct KeyEvent
 	EventHandler handler;
 };
 
-class InputComponent :public IComponent
+class MGINE_API InputComponent :public IComponent
 {
 public:
 	InputComponent(KeyEvent key);
@@ -19,6 +19,8 @@ public:
 	~InputComponent();
 	void Notify();
 	KeyEvent GetKey();
+	void update() override;
+	void draw() override;
 private:
 	KeyEvent m_key;
 };
