@@ -18,11 +18,20 @@ void Object::draw()
 		n.second->draw();
 	}
 }
+
 void Object::update(float dt)
 {
 	for (auto n : m_components)
 	{
 		n.second->update();
+	}
+}
+
+void Object::preInitComponents()
+{
+	for (auto n : m_components)
+	{
+		n.second->preInit(m_components);
 	}
 }
 

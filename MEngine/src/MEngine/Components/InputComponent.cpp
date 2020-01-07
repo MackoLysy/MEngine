@@ -23,6 +23,10 @@ void InputComponent::Notify()
 	int a = 12;
 }
 
+void InputComponent::preInit(std::unordered_map<std::string, std::shared_ptr<IComponent>>& components) {
+
+}
+
 KeyEvent InputComponent::GetKey()
 {
 	return m_key;

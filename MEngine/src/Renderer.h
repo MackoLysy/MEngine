@@ -5,7 +5,7 @@
 
 #include "OpenGl/VertexArray.h"
 #include "OpenGl/IndexBuffer.h"
-#include "Shader.h"
+#include "OpenGl/Shader.h"
 
 class Renderer
 {

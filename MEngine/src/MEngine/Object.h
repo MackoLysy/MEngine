@@ -12,6 +12,7 @@ public:
 	virtual ~Object();
 	void draw();
 	void update(float dt);
+	void preInitComponents();
 	void addComponent(std::shared_ptr<IComponent> component);
 	void removeComponent(std::shared_ptr<IComponent> component);
 	std::shared_ptr<IComponent> getComponent(std::string name);

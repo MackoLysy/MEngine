@@ -4,10 +4,25 @@
 #include <string>
 #include <sstream>
 
-Shader::Shader(const std::string& filepath): m_filePath(filepath), m_RendererID(0)
+Shader::Shader(const std::string& filepath) : m_filePath(filepath), m_RendererID(0)
 {
 	ShaderProgramSource source = ParseShader(filepath);
 	m_RendererID = CreateShader(source.VertexSource, source.FragmentSource);
+}
+
+Shader::Shader(std::string vertexShader, std::string fragmentShader): m_RendererID(0)
+{
+	m_RendererID = CreateShader(vertexShader, fragmentShader);
+}
+
+Shader::Shader()
+{
+
+}
+
+void Shader::Init(std::string vertexShader, std::string fragmentShader)
+{
+	m_RendererID = CreateShader(vertexShader, fragmentShader);
 }
 
 Shader::~Shader()

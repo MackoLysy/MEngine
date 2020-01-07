@@ -1,6 +1,5 @@
 #pragma once
 #include"IComponent.h"
-#include "../Core.h"
 #include "../Event/Eventhanlder.h"
 
 struct KeyEvent
@@ -21,6 +20,7 @@ public:
 	KeyEvent GetKey();
 	void update() override;
 	void draw() override;
+	void preInit(std::unordered_map<std::string, std::shared_ptr<IComponent>>& components) override;
 private:
 	KeyEvent m_key;
 };

@@ -1,6 +1,5 @@
 #include <iostream>
-#include "MEgine.h"
-#include <windows.h>
+#include "MEngine.h"
 
 class Sandbox : public Application
 {
@@ -10,7 +9,7 @@ public:
 
 private:
 	Object *m_item;
-	std::shared_ptr<MeshComponent> m_mesh;
+	
 };
 
 Sandbox::Sandbox()
@@ -21,11 +20,26 @@ Sandbox::Sandbox()
 		2, 3, 0
 	};
 	MeshGenerator meshGenerator = MeshGenerator::CreateMeshFromPosCol();
-	Color color(1.0, 1.0, 1.0, 1.0);
-	meshGenerator.push({ Pos(-0.5f, -0.5f, 0.0f), color });
-	meshGenerator.push({ Pos(0.5f, -0.5f, 0.0f), color });
-	meshGenerator.push({ Pos(0.5f,  0.5f, 0.0f), color });
-	meshGenerator.push({ Pos(-0.5f,  0.5f, 0.0f), color });
+	Color colorRed(1.0, 0.0, 0.0, 1.0);
+	Color colorGreen(0.0, 1.0, .0, 1.0);
+	Color colorBlue(0.0, 0.0, 1.0, 1.0);
+	Color colorRest(0.0, 1.0, 1.0, 1.0);
+
+	/*meshGenerator.push({ Pos(-0.5f, -0.5f, 0.0f), colorRed });
+	meshGenerator.push({ Pos(0.5f, -0.5f, 0.0f), colorGreen });
+	meshGenerator.push({ Pos(0.5f,  0.5f, 0.0f), colorBlue });
+	meshGenerator.push({ Pos(-0.5f,  0.5f, 0.0f), colorRest });*/
+
+	meshGenerator.push({ Pos(0.0f, 0.0f, 0.0f), colorRed });
+	meshGenerator.push({ Pos(0.0f, 1.0f, 0.0f), colorGreen });
+	meshGenerator.push({ Pos(1.0f, 1.0f, 0.0f), colorBlue });
+	meshGenerator.push({ Pos(1.0f, 0.0f, 0.0f), colorRest });
+
+	/*meshGenerator.push({ Pos(100.0f, 100.0f, 0.0f), colorRed });
+	meshGenerator.push({ Pos(100.0f, 200.0f, 0.0f), colorGreen });
+	meshGenerator.push({ Pos(200.0f, 200.0f, 0.0f), colorBlue });
+	meshGenerator.push({ Pos(200.0f, 100.0f, 0.0f), colorRest });*/
+
 	meshGenerator.pushIndecies(0);
 	meshGenerator.pushIndecies(1);
 	meshGenerator.pushIndecies(2);
@@ -33,13 +47,24 @@ Sandbox::Sandbox()
 	meshGenerator.pushIndecies(3);
 	meshGenerator.pushIndecies(0);
 	m_item = new Object;
+	std::shared_ptr<MeshComponent> m_mesh;
 	m_mesh = std::make_shared<MeshComponent>(meshGenerator);
+	std::shared_ptr<MaterialComponent> m_material;
+	m_material = std::make_shared<MaterialComponent>();
+	std::shared_ptr<TransformComponent> m_transform;
+	m_transform = std::make_shared<TransformComponent>();
+	m_transform->translate(400.0f, 20.0f, 0.0f);
+	m_transform->scale(100.0f, 100.0f, 0.0f);
+	m_transform->rotateZ(30.0f);
 	m_item->addComponent(m_mesh);
+	m_item->addComponent(m_material);
+	m_item->addComponent(m_transform);
 	this->addObject(m_item);
 }
 
 Sandbox ::~Sandbox()
 {
+
 }
 
 int main() {

@@ -2,7 +2,7 @@
 #include <string>
 #include <unordered_map>
 
-#include "Helpers.h"
+#include "../Helpers.h"
 #include "glm/glm.hpp"
 
 struct  ShaderProgramSource
@@ -16,10 +16,14 @@ class Shader
 {
 public:
 	Shader(const std::string& filepath);
+	Shader(std::string vertexShader, std::string fragmentShader);
+	void Init(std::string vertexShader, std::string fragmentShader);
+	Shader();
 	~Shader();
 
 	void Bind() const;
 	void UnBind() const;
+	bool isInitted() const { return m_RendererID != 0; }
 	void setUniform4f(std::string name, float f1, float f2, float f3, float f4);
 	void setUniform1i(std::string name, int i1);
 	void setUniforMat4f(std::string name, const glm::mat4 matrix);

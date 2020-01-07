@@ -1,7 +1,7 @@
 #include "src/OpenGl/VertexBuffer.h"
 #include "src/OpenGl/IndexBuffer.h"
 #include "src/OpenGl/VertexArray.h"
-#include "src/Shader.h"
+#include "src/OpenGl/Shader.h"
 #include "src/Renderer.h"
 #include "src/Texture.h"
 #include "glm/glm.hpp"
