@@ -16,6 +16,10 @@ MeshGenerator::~MeshGenerator()
 
 void MeshGenerator::push(PosColVertex elemet)
 {
+	if (m_type != POSCOL)
+	{
+		std::cerr << "Cannot insert wrong type of mesh!" << std::endl;
+	}
 	m_vertices.push_back(elemet.m_pos.m_x);
 	m_vertices.push_back(elemet.m_pos.m_y);
 	m_vertices.push_back(elemet.m_pos.m_z);
@@ -27,6 +31,10 @@ void MeshGenerator::push(PosColVertex elemet)
 }
 void MeshGenerator::push(PosTexVertex elemet)
 {
+	if (m_type != POSTEX)
+	{
+		std::cerr << "Cannot insert wrong type of mesh!" << std::endl;
+	}
 	m_vertices.push_back(elemet.m_pos.m_x);
 	m_vertices.push_back(elemet.m_pos.m_y);
 	m_vertices.push_back(elemet.m_pos.m_z);
@@ -60,6 +68,13 @@ MeshGenerator MeshGenerator::CreateMeshFromPosCol()
 {
 	MeshGenerator gen;
 	gen.m_type = POSCOL;
+	return gen;
+}
+
+MeshGenerator MeshGenerator::CreateMeshFromPosTex()
+{
+	MeshGenerator gen;
+	gen.m_type = POSTEX;
 	return gen;
 }
 

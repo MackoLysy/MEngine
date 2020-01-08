@@ -4,12 +4,13 @@
 
 class MGINE_API TransformComponent : public IComponent
 {
+
 public:
 	TransformComponent();
 	~TransformComponent();
-	void update();
-	void draw();
-	void preInit(std::unordered_map<std::string, std::shared_ptr<IComponent>>& components);
+	void update() override;
+	void draw() override;
+	void preInit(std::unordered_map<std::string, std::shared_ptr<IComponent>>& components) override;
 	glm::vec3& GetPosition();
 	glm::vec3& GetRotation();
 	glm::vec3& GetScale();
@@ -22,6 +23,7 @@ public:
 	void rotateX(float angle);
 	void rotateY(float angle);
 	void rotateZ(float angle);
+
 private:
 	glm::mat4 getRotationMatrix();
 	glm::mat4 m_rotationMatrix;

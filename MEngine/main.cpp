@@ -3,7 +3,7 @@
 #include "src/OpenGl/VertexArray.h"
 #include "src/OpenGl/Shader.h"
 #include "src/Renderer.h"
-#include "src/Texture.h"
+#include "src/OpenGl/Texture.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "imGui/imgui.h"

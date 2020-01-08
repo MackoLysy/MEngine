@@ -4,6 +4,7 @@
 #include "MEngine/Components/MeshComponent.h"
 #include "MEngine/Components/MaterialComponent.h"
 #include "MEngine/Components/TransformComponent.h"
+#include "MEngine/Components/TextureComponent.h"
 
 #include "MEngine/Object.h"
 #include "MEngine/KeyCode.h"

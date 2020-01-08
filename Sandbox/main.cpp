@@ -9,7 +9,7 @@ public:
 
 private:
 	Object *m_item;
-	
+
 };
 
 Sandbox::Sandbox()
@@ -19,7 +19,7 @@ Sandbox::Sandbox()
 		0, 1, 2,
 		2, 3, 0
 	};
-	MeshGenerator meshGenerator = MeshGenerator::CreateMeshFromPosCol();
+	MeshGenerator meshGenerator = MeshGenerator::CreateMeshFromPosTex();
 	Color colorRed(1.0, 0.0, 0.0, 1.0);
 	Color colorGreen(0.0, 1.0, .0, 1.0);
 	Color colorBlue(0.0, 0.0, 1.0, 1.0);
@@ -30,15 +30,10 @@ Sandbox::Sandbox()
 	meshGenerator.push({ Pos(0.5f,  0.5f, 0.0f), colorBlue });
 	meshGenerator.push({ Pos(-0.5f,  0.5f, 0.0f), colorRest });*/
 
-	meshGenerator.push({ Pos(0.0f, 0.0f, 0.0f), colorRed });
-	meshGenerator.push({ Pos(0.0f, 1.0f, 0.0f), colorGreen });
-	meshGenerator.push({ Pos(1.0f, 1.0f, 0.0f), colorBlue });
-	meshGenerator.push({ Pos(1.0f, 0.0f, 0.0f), colorRest });
-
-	/*meshGenerator.push({ Pos(100.0f, 100.0f, 0.0f), colorRed });
-	meshGenerator.push({ Pos(100.0f, 200.0f, 0.0f), colorGreen });
-	meshGenerator.push({ Pos(200.0f, 200.0f, 0.0f), colorBlue });
-	meshGenerator.push({ Pos(200.0f, 100.0f, 0.0f), colorRest });*/
+	meshGenerator.push({ Pos(0.0f, 0.0f, 0.0f), TexCord(0.0f,0.0f) });
+	meshGenerator.push({ Pos(0.0f, 1.0f, 0.0f), TexCord(0.0f,1.0f) });
+	meshGenerator.push({ Pos(1.0f, 1.0f, 0.0f), TexCord(1.0f,1.0f) });
+	meshGenerator.push({ Pos(1.0f, 0.0f, 0.0f), TexCord(1.0f,0.0f) });
 
 	meshGenerator.pushIndecies(0);
 	meshGenerator.pushIndecies(1);
@@ -46,6 +41,7 @@ Sandbox::Sandbox()
 	meshGenerator.pushIndecies(2);
 	meshGenerator.pushIndecies(3);
 	meshGenerator.pushIndecies(0);
+
 	m_item = new Object;
 	std::shared_ptr<MeshComponent> m_mesh;
 	m_mesh = std::make_shared<MeshComponent>(meshGenerator);
@@ -53,12 +49,15 @@ Sandbox::Sandbox()
 	m_material = std::make_shared<MaterialComponent>();
 	std::shared_ptr<TransformComponent> m_transform;
 	m_transform = std::make_shared<TransformComponent>();
-	m_transform->translate(400.0f, 20.0f, 0.0f);
-	m_transform->scale(100.0f, 100.0f, 0.0f);
-	m_transform->rotateZ(30.0f);
+	std::shared_ptr<TextureComponent> m_texture;
+	m_texture = std::make_shared<TextureComponent>("res/images.png");
+	m_transform->translate(400.0f, 0.0f, 0.0f);
+	m_transform->scale(300.0f, 300.0f, 0.0f);
+	m_transform->rotateZ(45.0f);
 	m_item->addComponent(m_mesh);
 	m_item->addComponent(m_material);
 	m_item->addComponent(m_transform);
+	m_item->addComponent(m_texture);
 	this->addObject(m_item);
 }
 

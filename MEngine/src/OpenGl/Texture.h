@@ -1,5 +1,5 @@
 #pragma once
-#include "Helpers.h"
+#include "../Helpers.h"
 
 
 class Texture
@@ -11,7 +11,9 @@ public:
 	void Unbind();
 	inline int GetWidth() const { return m_Width; }
 	inline int GetHeight() const { return m_Height; }
+	unsigned int getSlot() const { return m_slot; }
 private:
+	unsigned int m_slot;
 	unsigned int m_RednererId;
 	std::string m_filePath;
 	unsigned char* m_LocalBuffer;

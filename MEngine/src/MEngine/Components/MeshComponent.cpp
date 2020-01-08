@@ -17,7 +17,6 @@ MeshComponent::MeshComponent(MeshGenerator& mesh): m_type(0)
 	m_layout = std::make_shared<VertexBufferLayout>();
 	generateLayoutFromType(mesh.getType());
 	m_va->AddBuffer(m_vb, m_layout);
-	//m_shader = std::make_shared<Shader>("res/shader/Basic.Shader");*/
 }
 
 MeshComponent::~MeshComponent()

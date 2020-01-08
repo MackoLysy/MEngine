@@ -2,11 +2,13 @@
 #include "../Core.h"
 #include "../Vertex.h"
 #include <vector>
+#include <iostream>
 
 class MGINE_API MeshGenerator
 {
 public:
 	static MeshGenerator CreateMeshFromPosCol();
+	static MeshGenerator CreateMeshFromPosTex();
 	~MeshGenerator();
 	void push(PosColVertex elemet);
 	void push(PosTexVertex elemet);

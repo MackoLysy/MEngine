@@ -2,7 +2,7 @@
 #include "stb_image/stb_image.h"
 
 Texture::Texture(const std::string& filePath) : m_filePath(filePath),
-	m_LocalBuffer(nullptr), m_Width(0), m_Height(0), m_BPP(0)
+m_LocalBuffer(nullptr), m_Width(0), m_Height(0), m_BPP(0), m_slot()
 {
 	stbi_set_flip_vertically_on_load(1);
 	m_LocalBuffer = stbi_load(m_filePath.c_str(), &m_Width, &m_Height, &m_BPP, 4);
@@ -27,11 +27,18 @@ Texture::Texture(const std::string& filePath) : m_filePath(filePath),
 Texture::~Texture()
 {
 	GLCall(glDeleteTextures(1, &m_RednererId));
-	
+
 }
 
 void Texture::Bind(unsigned int slot /*= 0*/)
 {
+	m_slot = slot;
 	GLCall(glActiveTexture(GL_TEXTURE0 + slot));
 	GLCall(glBindTexture(GL_TEXTURE_2D, m_RednererId));
+}
+
+void Texture::Unbind()
+{
+	GLCall(glBindTexture(GL_TEXTURE_2D, 0));
+	GLCall(glDeleteTextures(1, &m_RednererId));
 }
