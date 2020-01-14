@@ -9,7 +9,7 @@ public:
 
 private:
 	Object *m_item;
-
+	Object *m_item2;
 };
 
 Sandbox::Sandbox()
@@ -58,7 +58,24 @@ Sandbox::Sandbox()
 	m_item->addComponent(m_material);
 	m_item->addComponent(m_transform);
 	m_item->addComponent(m_texture);
-	this->addObject(m_item);
+	m_item2 = new Object;
+
+	std::shared_ptr<TransformComponent> m_transform2;
+	std::shared_ptr<MaterialComponent> m_material2;
+	std::shared_ptr<MeshComponent> m_mesh2;
+	m_mesh2 = std::make_shared<MeshComponent>(meshGenerator);
+	m_material2 = std::make_shared<MaterialComponent>();
+	m_transform2 = std::make_shared<TransformComponent>();
+	m_item2->addComponent(m_mesh2);
+	m_item2->addComponent(m_material2);
+	m_item2->addComponent(m_transform2);
+	m_item2->addComponent(m_texture);
+	m_transform2->scale(300.0f, 300.0f, 0.0f);
+	m_transform2->translate(200.0f, 500.0f, 0.0f);
+	addLayer(0, Layer());
+	auto layer = getLayer(0);
+	layer->add(m_item);
+	layer->add(m_item2);
 }
 
 Sandbox ::~Sandbox()
@@ -69,6 +86,6 @@ Sandbox ::~Sandbox()
 int main() {
 	std::cout << "Hello world!" << std::endl;
 	Sandbox * app = new Sandbox();
-	app->Run();
+	app->run();
 	delete app;
 }

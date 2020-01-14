@@ -5,6 +5,7 @@
 #include "Core.h"
 #include "Object.h"
 #include "Input.h"
+#include "Layer.h"
 #include "../Vendor/glm/glm.hpp"
 
 struct GLFWwindow;
@@ -15,7 +16,9 @@ public:
 	Application();
 	~Application();
 	void addObject(Object*);
-	void Run();
+	std::shared_ptr<Layer> getLayer(int number);
+	void addLayer(int number, Layer layer);
+	void run();
 	static Application* getInstance();
 	glm::mat4 getOrtoProjection();
 	glm::mat4 getPerspectiveProjection();
@@ -23,15 +26,16 @@ public:
 private:
 	static void resizeCallback(GLFWwindow* window, int width, int height);
 	static Application* m_instance;
-	void Init();
-	void InitOjbects();
+	void init();
+	void initOjbects();
 	std::unique_ptr<Input> m_input;
 	GLFWwindow* m_window;
 	std::list<Object*> m_items;
+	std::unordered_map<int, std::shared_ptr<Layer>> m_layers;
 	glm::mat4 m_perspectiveProjection;
 	glm::mat4 m_ortoProjection;
-	void Draw();
-	void Update();
+	void draw();
+	void update();
 
 };
 

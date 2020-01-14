@@ -7,13 +7,12 @@ Application* Application::m_instance = nullptr;
 Application::Application()
 {
 	m_instance = this;
-	Init();
+	init();
 }
 
 
-void Application::Init()
+void Application::init()
 {
-
 	glfwInit();
 	m_window = glfwCreateWindow(800, 600, "Hello World", NULL, NULL);
 	if (!m_window)
@@ -38,15 +37,15 @@ void Application::Init()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 }
 
-void Application::Run()
+void Application::run()
 {
-	InitOjbects();
+	initOjbects();
 	while (!glfwWindowShouldClose(m_window))
 	{
 		GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
 		GLCall(glClear(GL_COLOR_BUFFER_BIT));
-		Draw();
-		Update();
+		draw();
+		update();
 		glfwSwapBuffers(m_window);
 		glfwPollEvents();
 	}
@@ -79,30 +78,51 @@ Application::~Application()
 
 }
 
-void Print()
-{
-	std::cout << "Hello World!" << std::endl;
-}
-void Application::InitOjbects()
+void Application::initOjbects()
 {
 	for (auto item : m_items)
 	{
 		item->preInitComponents();
 	}
+	for (auto layer : m_layers)
+	{
+		layer.second->initObject();
+	}
 }
+
 void Application::addObject(Object* item)
 {
 	m_items.push_back(item);
 }
-void Application::Draw()
+
+std::shared_ptr<Layer> Application::getLayer(int number)
+{
+	auto it = m_layers.find(number);
+	if (it == m_layers.end())
+	{
+		return nullptr;
+	}
+	return it->second;
+}
+
+void Application::addLayer(int number, Layer layer)
+{
+	m_layers[number] = std::make_shared<Layer>();
+}
+
+void Application::draw()
 {
 	for (auto m_item : m_items)
 	{
 		m_item->draw();
 	}
+	for (auto m_layer : m_layers)
+	{
+		m_layer.second->draw();
+	}
 }
 
-void Application::Update()
+void Application::update()
 {
 	for (auto m_item : m_items)
 	{

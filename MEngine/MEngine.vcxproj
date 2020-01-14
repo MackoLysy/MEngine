@@ -167,9 +167,11 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Elements\Rect.cpp" />
     <ClCompile Include="src\MEngine\Components\MaterialComponent.cpp" />
     <ClCompile Include="src\MEngine\Components\TextureComponent.cpp" />
     <ClCompile Include="src\MEngine\Components\TransformComponent.cpp" />
+    <ClCompile Include="src\MEngine\Layer.cpp" />
     <ClCompile Include="src\MEngine\Mesh\MeshGenerator.cpp" />
     <ClCompile Include="src\MEngine\Object.cpp" />
     <ClCompile Include="src\MEngine\Application.cpp" />
@@ -199,9 +201,11 @@
     <ClCompile Include="src\MEngine\Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Elements\Rect.h" />
     <ClInclude Include="src\MEngine\Components\MaterialComponent.h" />
     <ClInclude Include="src\MEngine\Components\TextureComponent.h" />
     <ClInclude Include="src\MEngine\Components\TransformComponent.h" />
+    <ClInclude Include="src\MEngine\Layer.h" />
     <ClInclude Include="src\MEngine\Mesh\MeshGenerator.h" />
     <ClInclude Include="src\MEngine\Object.h" />
     <ClInclude Include="src\MEngine.h" />

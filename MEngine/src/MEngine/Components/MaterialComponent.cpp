@@ -52,7 +52,7 @@ void MaterialComponent::bind()
 		glm::vec3(0, 0, 0), // and looks at the origin
 		glm::vec3(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
 	);
-	if (m_transform != nullptr)
+	if (m_transform)
 	{
 		glm::mat4 Model = m_transform->getModelMatrix();
 		m_shader->setUniforMat4f("u_Model", Model);
