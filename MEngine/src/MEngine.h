@@ -6,6 +6,8 @@
 #include "MEngine/Components/TransformComponent.h"
 #include "MEngine/Components/TextureComponent.h"
 
+#include "Elements/Rect.h"
+
 #include "MEngine/Object.h"
 #include "MEngine/KeyCode.h"
 #include "MEngine/Event/Event.h"
