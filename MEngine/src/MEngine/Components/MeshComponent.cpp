@@ -5,7 +5,6 @@
 #include "../OpenGl/VertexBuffer.h"
 #include "../OpenGl/VertexArray.h"
 #include "../OpenGl/Shader.h"
-#include <Windows.h>
 #include "../OpenGl/Shaders/Shaders.h"
 
 MeshComponent::MeshComponent(MeshGenerator& mesh): m_type(0)
@@ -49,13 +48,13 @@ void MeshComponent::generateLayoutFromType(int type)
 	switch (type)
 	{
 	case 1:
-		m_layout->Push<float>(3);
-		m_layout->Push<float>(4);
+		m_layout->PushFloat(3);
+		m_layout->PushFloat(4);
 		m_type = 1;
 		break;
 	case 2:
-		m_layout->Push<float>(3);
-		m_layout->Push<float>(2);
+		m_layout->PushFloat(3);
+		m_layout->PushFloat(2);
 		m_type = 2;
 	default:
 		break;

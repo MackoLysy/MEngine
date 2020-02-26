@@ -23,6 +23,7 @@ void MaterialComponent::preInit(std::unordered_map<std::string, std::shared_ptr<
 	setMeshComponent(components);
 	setTextureComponent(components);
 	setTransformComponent(components);
+	setDefaultShader();
 }
 
 void MaterialComponent::setDefaultShader()

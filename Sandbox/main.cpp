@@ -19,21 +19,21 @@ Sandbox::Sandbox()
 		0, 1, 2,
 		2, 3, 0
 	};
-	MeshGenerator meshGenerator = MeshGenerator::CreateMeshFromPosTex();
+	MeshGenerator meshGenerator = MeshGenerator::CreateMeshFromPosCol();
 	Color colorRed(1.0, 0.0, 0.0, 1.0);
 	Color colorGreen(0.0, 1.0, .0, 1.0);
 	Color colorBlue(0.0, 0.0, 1.0, 1.0);
 	Color colorRest(0.0, 1.0, 1.0, 1.0);
 
-	/*meshGenerator.push({ Pos(-0.5f, -0.5f, 0.0f), colorRed });
+	meshGenerator.push({ Pos(-0.5f, -0.5f, 0.0f), colorRed });
 	meshGenerator.push({ Pos(0.5f, -0.5f, 0.0f), colorGreen });
 	meshGenerator.push({ Pos(0.5f,  0.5f, 0.0f), colorBlue });
-	meshGenerator.push({ Pos(-0.5f,  0.5f, 0.0f), colorRest });*/
+	meshGenerator.push({ Pos(-0.5f,  0.5f, 0.0f), colorRest });
 
-	meshGenerator.push({ Pos(0.0f, 0.0f, 0.0f), TexCord(0.0f,0.0f) });
-	meshGenerator.push({ Pos(0.0f, 1.0f, 0.0f), TexCord(0.0f,1.0f) });
-	meshGenerator.push({ Pos(1.0f, 1.0f, 0.0f), TexCord(1.0f,1.0f) });
-	meshGenerator.push({ Pos(1.0f, 0.0f, 0.0f), TexCord(1.0f,0.0f) });
+	// meshGenerator.push({ Pos(0.0f, 0.0f, 0.0f), TexCord(0.0f,0.0f) });
+	// meshGenerator.push({ Pos(0.0f, 1.0f, 0.0f), TexCord(0.0f,1.0f) });
+	// meshGenerator.push({ Pos(1.0f, 1.0f, 0.0f), TexCord(1.0f,1.0f) });
+	// meshGenerator.push({ Pos(1.0f, 0.0f, 0.0f), TexCord(1.0f,0.0f) });
 
 	meshGenerator.pushIndecies(0);
 	meshGenerator.pushIndecies(1);
@@ -51,7 +51,7 @@ Sandbox::Sandbox()
 	m_transform = std::make_shared<TransformComponent>();
 	std::shared_ptr<TextureComponent> m_texture;
 	m_texture = std::make_shared<TextureComponent>("res/images.png");
-	m_transform->translate(400.0f, 0.0f, 0.0f);
+	m_transform->translate(20.0f, 100.0f, 0.0f);
 	m_transform->scale(300.0f, 300.0f, 0.0f);
 	m_transform->rotateZ(45.0f);
 	m_item->addComponent(m_mesh);
@@ -72,10 +72,11 @@ Sandbox::Sandbox()
 	m_item2->addComponent(m_texture);
 	m_transform2->scale(300.0f, 300.0f, 0.0f);
 	m_transform2->translate(200.0f, 500.0f, 0.0f);
-	addLayer(0, Layer());
-	auto layer = getLayer(0);
-	layer->add(m_item);
-	layer->add(m_item2);
+	// addLayer(0, Layer());
+	// auto layer = getLayer(0);
+	// layer->add(m_item);
+	// layer->add(m_item2);
+	addObject(m_item);
 }
 
 Sandbox ::~Sandbox()
@@ -84,7 +85,6 @@ Sandbox ::~Sandbox()
 }
 
 int main() {
-	std::cout << "Hello world!" << std::endl;
 	Sandbox * app = new Sandbox();
 	app->run();
 	delete app;

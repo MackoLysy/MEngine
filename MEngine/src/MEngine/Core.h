@@ -7,5 +7,9 @@
 #define MGINE_API __declspec(dllimport)
 #endif // _BUILD_DLL
 #else
-	#error ONLY WINDOWS FOR NOW :(
+#ifdef _BUILD_DLL
+#define MGINE_API 
+#else
+#define MGINE_API 
+#endif
 #endif
